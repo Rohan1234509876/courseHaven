@@ -9,6 +9,8 @@ import "slick-carousel/slick/slick-theme.css";
 import { useState } from 'react';
 import toast from 'react-hot-toast'
 
+import { BACKEND_URL } from "../utils/utils";
+
 const Home = () => {
 
     const [courses, setCourses] = useState([]);
@@ -25,7 +27,7 @@ const Home = () => {
     useEffect(()=>{
         const getCourses = async() => {
             try {
-                const response = await axios.get("http://localhost:4001/api/v1/courses")
+                const response = await axios.get(`${BACKEND_URL}/courses`)
                 console.log(response.data.courses)
                 setCourses(response.data.courses)
                 
@@ -42,7 +44,7 @@ const Home = () => {
 
 const handleLogout = async () => {
     try {
-      const response = await axios.get("http://localhost:4001/api/v1/user/logout", {
+      const response = await axios.get(`${BACKEND_URL}/user/logout`, {
         withCredentials: true,
       });
       toast.success(response.data.message);

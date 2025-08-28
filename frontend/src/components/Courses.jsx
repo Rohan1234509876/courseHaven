@@ -14,6 +14,9 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
 
+import { BACKEND_URL } from "../utils/utils";
+
+
 function Courses() {
   const [courses, setCourses] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,7 +39,7 @@ function Courses() {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get("http://localhost:4001/api/v1/courses", {
+        const response = await axios.get(`${BACKEND_URL}/courses`, {
           withCredentials: true,
         });
         console.log(response.data.courses);
@@ -52,7 +55,7 @@ function Courses() {
   // Logout
   const handleLogout = async () => {
     try {
-      const response = await axios.get("http://localhost:4001/api/v1/user/logout", {
+      const response = await axios.get(`${BACKEND_URL}/user/logout`, {
         withCredentials: true,
       });
       toast.success(response.data.message);

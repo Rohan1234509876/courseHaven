@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
+
+import { BACKEND_URL } from "../utils/utils";
+
 const Buy = () => {
   const {courseId} = useParams();
   
@@ -33,7 +36,7 @@ const currentUser = userData?.token?.user;
     const fetchBuyCourseData = async () => {
       try {
         const response = await axios.post(
-          `http://localhost:4001/api/v1/buy/${courseId}`,
+          `${BACKEND_URL}/buy/${courseId}`,
           {},
           {
             headers: {
@@ -124,7 +127,7 @@ const currentUser = userData?.token?.user;
 };
 
       await axios
-        .post("http://localhost:4001/api/v1/order/", paymentInfo, {
+        .post(`${BACKEND_URL}/order/`, paymentInfo, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
